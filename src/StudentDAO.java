@@ -44,7 +44,33 @@ public void getAllStudents() {
 
     } catch (Exception e) {
         System.out.println(e.getMessage());
-    }
-}
+
+ }
 
 }
+public void deleteStudent(int id) {
+    try {
+        Connection con = DBConnection.getConnection();
+
+        String query = "DELETE FROM students WHERE id = ?";
+
+        PreparedStatement ps = con.prepareStatement(query);
+
+        ps.setInt(1, id);
+
+        int rows = ps.executeUpdate();
+
+        if (rows > 0) {
+            System.out.println("Student Deleted Successfully!");
+        } else {
+            System.out.println("Student Not Found!");
+        }
+
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+
+}
+
+} 
