@@ -72,5 +72,29 @@ public void deleteStudent(int id) {
 
 
 }
+public void updateStudent(int id, String name, int age) {
+    try {
+        Connection con = DBConnection.getConnection();
+
+        String query = "UPDATE students SET name = ?, age = ? WHERE id = ?";
+
+        PreparedStatement ps = con.prepareStatement(query);
+
+        ps.setString(1, name);
+        ps.setInt(2, age);
+        ps.setInt(3, id);
+
+        int rows = ps.executeUpdate();
+
+        if (rows > 0) {
+            System.out.println("Student Updated Successfully!");
+        } else {
+            System.out.println("Student Not Found!");
+        }
+
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+}
 
 } 
